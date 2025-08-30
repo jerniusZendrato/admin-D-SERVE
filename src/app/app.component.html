@@ -1,1 +1,14 @@
-<router-outlet></router-outlet>
+<nav class="bg-gray-800 text-white p-4" *ngIf="isAuthenticated">
+  <div class="container mx-auto flex justify-between items-center">
+    <h1 class="text-xl font-bold">Admin D-SERVE</h1>
+    <div class="space-x-4">
+      <a routerLink="/home" class="hover:text-gray-300">Home</a>
+      <a routerLink="/unit-types" class="hover:text-gray-300">Unit Types</a>
+      <a routerLink="/units" class="hover:text-gray-300">Units</a>
+      <button (click)="logout()" class="hover:text-gray-300">Logout</button>
+    </div>
+  </div>
+</nav>
+<main class="min-h-screen bg-gray-100">
+  <router-outlet></router-outlet>
+</main>

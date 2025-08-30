@@ -1,38 +1,41 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
+import { LoginRequest } from '../../../models/unit.model';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-  email = '';
-  password = '';
+  credentials: LoginRequest = { username: '', password: '' };
+  loading = false;
+  error = '';
 
-  dataemail = 'admin11@gmail.com';
-  datapass = '123';
-  constructor(
-    private router: Router,
-  ){}
-    onLogin() {
-    if (!this.email || !this.password) {
-      alert('Username dan password harus diisi!');
+  constructor(private authService: AuthService, private router: Router) {}
+
+  onLogin() {
+    if (!this.credentials.username || !this.credentials.password) {
+      this.error = 'Username dan password harus diisi!';
       return;
     }
-    if (this.email !=this.dataemail || this.password != this.datapass) {
-      alert('Username dan password belum sesuai!');
-      return;
-    }
-    if(this.email === this.dataemail && this.password === this.datapass ){
-      this.router.navigateByUrl('/home');
-    }
-    console.log('Login dengan:', this.email, this.password);
-    // TODO: panggil API login di sini
+    
+    this.loading = true;
+    this.error = '';
+    
+    this.authService.login(this.credentials).subscribe({
+      next: (response) => {
+        this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        this.error = 'Username atau password salah';
+        this.loading = false;
+      }
+    });
   }
-
-
 }
