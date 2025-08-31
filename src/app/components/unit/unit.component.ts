@@ -34,7 +34,9 @@ export class UnitComponent implements OnInit {
   loadUnits() {
     this.unitService.getUnits().subscribe({
       next: (response) => {
-        this.units = response.units || [];
+        this.units = response.data.units || [];
+
+        console.log("this.units :",this.units )
       },
       error: (error) => {
         if (error.status === 401) {
