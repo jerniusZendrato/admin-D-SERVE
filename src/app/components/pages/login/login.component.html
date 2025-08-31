@@ -18,7 +18,9 @@
           name="username"
           required
           placeholder="Enter your username"
+          (ngModelChange)="credentials.username = $event.toUpperCase()"
           class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 outline-none transition"
+          
         />
       </div>
 
