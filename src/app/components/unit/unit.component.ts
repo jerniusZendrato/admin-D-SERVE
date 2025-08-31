@@ -4,10 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UnitService } from '../../services/unit.service';
 import { AuthService } from '../../services/auth.service';
-import { Unit, UnitType } from '../../models/unit.model';
+import { Unit, UnitType, CreateUnitRequest } from '../../models/unit.model';
 
 @Component({
   selector: 'app-unit',
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './unit.component.html',
   styleUrl: './unit.component.css'
@@ -33,7 +34,7 @@ export class UnitComponent implements OnInit {
   loadUnits() {
     this.unitService.getUnits().subscribe({
       next: (response) => {
-        this.units = response.data?.units || [];
+        this.units = response.units || [];
       },
       error: (error) => {
         if (error.status === 401) {
@@ -87,7 +88,11 @@ export class UnitComponent implements OnInit {
         error: (error) => console.error('Error updating unit:', error)
       });
     } else {
-      this.unitService.createUnit(this.selectedUnit).subscribe({
+      const createRequest: CreateUnitRequest = {
+        name: this.selectedUnit.name,
+        unitTypeId: this.selectedUnit.unitTypeId
+      };
+      this.unitService.createUnit(createRequest).subscribe({
         next: () => {
           this.loadUnits();
           this.closeForm();

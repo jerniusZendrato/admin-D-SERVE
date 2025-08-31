@@ -29,7 +29,7 @@
             required
             class="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           >
-            <option value="0">Select Unit Type</option>
+            <option value="">Select Unit Type</option>
             <option *ngFor="let unitType of unitTypes" [value]="unitType.id">
               {{ unitType.name }}
             </option>
