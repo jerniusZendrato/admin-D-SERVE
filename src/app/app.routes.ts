@@ -3,6 +3,7 @@ import { LoginComponent } from './components/pages/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { UnitComponent } from './components/unit/unit.component';
 import { UnitTypeComponent } from './components/unit-type/unit-type.component';
+import { UserComponent } from './components/user/user.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -11,4 +12,5 @@ export const routes: Routes = [
      { path: 'home', component: HomeComponent, canActivate: [authGuard] },
      { path: 'units', component: UnitComponent, canActivate: [authGuard] },
      { path: 'unit-types', component: UnitTypeComponent, canActivate: [authGuard] },
+     { path: 'users', component: UserComponent, canActivate: [authGuard] },
 ];

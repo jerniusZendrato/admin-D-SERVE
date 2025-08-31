@@ -52,4 +52,27 @@ export class UnitService {
   deleteUnitType(id: string): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/unit-types/${id}`);
   }
+
+  // User CRUD
+  getUsers(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/users`);
+  }
+
+  getUser(id: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/users/${id}`);
+  }
+
+  createUser(user: any): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.post<any>(`${this.baseUrl}/users`, user, { headers });
+  }
+
+  updateUser(id: string, user: any): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' };
+    return this.http.put<any>(`${this.baseUrl}/users/${id}`, user, { headers });
+  }
+
+  deleteUser(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.baseUrl}/users/${id}`);
+  }
 }

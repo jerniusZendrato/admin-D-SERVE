@@ -7,6 +7,13 @@ export interface Unit {
   updatedAt?: string;
 }
 
+export interface UnitResponse {
+  id: string;
+  name: string;
+  status: 'AVAILABLE' | 'BUSY' | 'MAINTENANCE';
+  unitType: UnitType;
+}
+
 export interface UnitType {
   id?: string;
   name: string;
@@ -44,7 +51,28 @@ export interface LoginResponse {
 }
 
 export interface User {
-  id: number;
+  id: string;
   username: string;
+  role: string;
+  unit: UnitResponse | null;
+  createdAt?: string;
+  updatedAt?: string;
+}
+
+export interface CreateUserRequest {
+  username: string;
+  password: string;
+}
+
+export interface UpdateUserRequest {
+  username?: string;
+  name?: string;
+  email?: string;
+  password?: string;
+  role?: string;
+}
+
+export interface CreateUnitRequest {
   name: string;
+  unitTypeId: string;
 }
