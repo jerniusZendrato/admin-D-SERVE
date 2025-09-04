@@ -15,7 +15,7 @@ import { User, CreateUserRequest, UpdateUserRequest } from '../../models/unit.mo
 })
 export class UserComponent implements OnInit {
   users: User[] = [];
-  selectedUser: CreateUserRequest = { username: '', password: '' };
+  selectedUser: CreateUserRequest = { username: '', password: '', role: '' };
   editingUserId: string | null = null;
   isEditing = false;
   showForm = false;
@@ -52,12 +52,13 @@ export class UserComponent implements OnInit {
     if (user) {
       this.selectedUser = { 
         username: user.username, 
-        password: ''
+        password: '',
+        role: user.role
       };
       this.editingUserId = user.id;
       this.isEditing = true;
     } else {
-      this.selectedUser = { username: '', password: '' };
+      this.selectedUser = { username: '', password: '', role: '' };
       this.editingUserId = null;
       this.isEditing = false;
     }
@@ -65,7 +66,7 @@ export class UserComponent implements OnInit {
 
   closeForm() {
     this.showForm = false;
-    this.selectedUser = { username: '', password: '' };
+    this.selectedUser = { username: '', password: '', role: '' };
     this.editingUserId = null;
     this.isEditing = false;
   }
@@ -75,6 +76,7 @@ export class UserComponent implements OnInit {
       const updateData: UpdateUserRequest = {};
       if (this.selectedUser.username) updateData.username = this.selectedUser.username;
       if (this.selectedUser.password) updateData.password = this.selectedUser.password;
+      if (this.selectedUser.role) updateData.role = this.selectedUser.role;
       
       this.unitService.updateUser(this.editingUserId, updateData).subscribe({
         next: () => {

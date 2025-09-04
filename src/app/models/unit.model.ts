@@ -62,6 +62,7 @@ export interface User {
 export interface CreateUserRequest {
   username: string;
   password: string;
+  role: string;
 }
 
 export interface UpdateUserRequest {

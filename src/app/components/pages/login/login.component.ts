@@ -30,7 +30,14 @@ export class LoginComponent {
     
     this.authService.login(this.credentials).subscribe({
       next: (response) => {
-        this.router.navigate(['/home']);
+        const user = response.data?.user || response.user;
+        if (user?.role === 'ADMIN') {
+          this.router.navigate(['/home']);
+        } else {
+          this.authService.logout();
+          this.error = 'Akses ditolak. Hanya admin yang dapat login.';
+          this.loading = false;
+        }
       },
       error: (error) => {
         this.error = 'Username atau password salah';
