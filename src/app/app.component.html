@@ -1,15 +1,98 @@
-<nav class="bg-gray-800 text-white p-4" *ngIf="isAuthenticated">
-  <div class="container mx-auto flex justify-between items-center">
-    <h1 class="text-xl font-bold">Admin D-SERVE</h1>
-    <div class="space-x-4">
-      <a routerLink="/home" class="hover:text-gray-300">Home</a>
-      <a routerLink="/unit-types" class="hover:text-gray-300">Unit Types</a>
-      <a routerLink="/units" class="hover:text-gray-300">Units</a>
-      <a routerLink="/users" class="hover:text-gray-300">Users</a>
-      <button (click)="logout()" class="hover:text-gray-300">Logout</button>
+<nav
+  *ngIf="isAuthenticated"
+  class="bg-gray-900 text-white sticky top-0 z-50 shadow-md"
+>
+  <div class="container mx-auto flex justify-between items-center px-4 py-3">
+    <!-- Brand -->
+    <h1 class="text-xl font-extrabold tracking-wide">🚀 Admin D-SERVE</h1>
+
+    <!-- Desktop menu -->
+    <div class="hidden md:flex space-x-6 items-center">
+      <a
+        routerLink="/home"
+        routerLinkActive="text-green-400 border-b-2 border-green-400"
+        class="hover:text-green-300 transition"
+      >
+        Home
+      </a>
+      <a
+        routerLink="/unit-types"
+        routerLinkActive="text-green-400 border-b-2 border-green-400"
+        class="hover:text-green-300 transition"
+      >
+        Unit Types
+      </a>
+      <a
+        routerLink="/units"
+        routerLinkActive="text-green-400 border-b-2 border-green-400"
+        class="hover:text-green-300 transition"
+      >
+        Units
+      </a>
+      <a
+        routerLink="/users"
+        routerLinkActive="text-green-400 border-b-2 border-green-400"
+        class="hover:text-green-300 transition"
+      >
+        Users
+      </a>
+      <button
+        (click)="logout()"
+        class="px-3 py-1 rounded-lg bg-red-500 hover:bg-red-600 transition text-sm font-medium"
+      >
+        Logout
+      </button>
     </div>
+
+    <!-- Mobile menu button -->
+    <button
+      class="md:hidden flex items-center space-x-2 focus:outline-none"
+      (click)="isMenuOpen = !isMenuOpen"
+    >
+      <svg
+        *ngIf="!isMenuOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+      <svg
+        *ngIf="isMenuOpen"
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M6 18L18 6M6 6l12 12" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile dropdown menu -->
+  <div
+    *ngIf="isMenuOpen"
+    class="md:hidden bg-gray-800 border-t border-gray-700 px-4 py-3 space-y-3"
+  >
+    <a routerLink="/home" class="block hover:text-green-300">Home</a>
+    <a routerLink="/unit-types" class="block hover:text-green-300">Unit Types</a>
+    <a routerLink="/units" class="block hover:text-green-300">Units</a>
+    <a routerLink="/users" class="block hover:text-green-300">Users</a>
+    <button
+      (click)="logout()"
+      class="w-full text-left px-3 py-1 rounded-lg bg-red-500 hover:bg-red-600 transition text-sm font-medium"
+    >
+      Logout
+    </button>
   </div>
 </nav>
-<main class="min-h-screen bg-gray-100">
+
+<!-- Main content -->
+<main class="min-h-screen bg-gray-100 p-6">
   <router-outlet></router-outlet>
 </main>

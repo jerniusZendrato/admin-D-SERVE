@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { LoginRequest, LoginResponse, User } from '../models/unit.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  private baseUrl = 'https://mining-be-service-dev.up.railway.app/api';
+  private baseUrl = environment.apiUrl;
   private tokenKey = 'auth_token';
   private userKey = 'auth_user';
   private currentUserSubject = new BehaviorSubject<User | null>(this.getStoredUser());

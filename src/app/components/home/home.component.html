@@ -1,20 +1,56 @@
-<div class="p-6">
-  <h1 class="text-3xl font-bold mb-8">Admin D-SERVE Dashboard</h1>
-  
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-    <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
-      <h2 class="text-xl font-semibold mb-4">Unit Types</h2>
-      <p class="text-gray-600 mb-4">Manage unit type categories</p>
-      <a routerLink="/unit-types" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 inline-block">
+<div class="p-6 bg-gray-100 min-h-screen">
+  <h1 class="text-4xl md:text-5xl font-extrabold mb-10 text-gray-800 text-center md:text-left">
+    🚀 Dashboard
+  </h1>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- Unit Types Card -->
+    <div class="bg-gradient-to-br from-blue-400 to-blue-600 text-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform relative overflow-hidden">
+      <!-- Decorative Circle -->
+      <div class="absolute -top-8 -right-8 w-32 h-32 bg-white opacity-10 rounded-full"></div>
+
+      <h2 class="text-2xl font-semibold mb-3 flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-3-3v6m6 3H6a2 2 0 01-2-2V6a2 2 0 012-2h12a2 2 0 012 2v12a2 2 0 01-2 2z"/>
+        </svg>
+        Unit Types
+      </h2>
+      <p class="text-blue-100 mb-5">Manage unit type categories</p>
+      <a routerLink="/unit-types" class="bg-white text-blue-600 font-semibold px-4 py-2 rounded-lg hover:bg-blue-50 transition">
         Manage Unit Types
       </a>
     </div>
-    
-    <div class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition-shadow">
-      <h2 class="text-xl font-semibold mb-4">Units</h2>
-      <p class="text-gray-600 mb-4">Manage units and their types</p>
-      <a routerLink="/units" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 inline-block">
+
+    <!-- Units Card -->
+    <div class="bg-gradient-to-br from-green-400 to-green-600 text-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform relative overflow-hidden">
+      <div class="absolute -top-8 -right-8 w-32 h-32 bg-white opacity-10 rounded-full"></div>
+
+      <h2 class="text-2xl font-semibold mb-3 flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v4a1 1 0 001 1h16a1 1 0 001-1V7M4 7V5a1 1 0 011-1h14a1 1 0 011 1v2"/>
+        </svg>
+        Units
+      </h2>
+      <p class="text-green-100 mb-5">Manage units and their types</p>
+      <a routerLink="/units" class="bg-white text-green-600 font-semibold px-4 py-2 rounded-lg hover:bg-green-50 transition">
         Manage Units
+      </a>
+    </div>
+
+    <!-- Optional: Add more cards -->
+    <!-- Example: Users Card -->
+    <div class="bg-gradient-to-br from-purple-400 to-purple-600 text-white p-6 rounded-2xl shadow-lg transform hover:scale-105 transition-transform relative overflow-hidden">
+      <div class="absolute -top-8 -right-8 w-32 h-32 bg-white opacity-10 rounded-full"></div>
+
+      <h2 class="text-2xl font-semibold mb-3 flex items-center space-x-2">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A10.963 10.963 0 0112 15c2.93 0 5.627 1.1 7.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+        </svg>
+        Users
+      </h2>
+      <p class="text-purple-100 mb-5">Manage application users</p>
+      <a routerLink="/users" class="bg-white text-purple-600 font-semibold px-4 py-2 rounded-lg hover:bg-purple-50 transition">
+        Manage Users
       </a>
     </div>
   </div>

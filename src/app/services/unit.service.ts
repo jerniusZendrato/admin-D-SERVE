@@ -2,12 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Unit, UnitType, ApiResponse, PaginatedResponse } from '../models/unit.model';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UnitService {
-  private baseUrl = 'https://mining-be-service-dev.up.railway.app/api';
+  private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) {}
 

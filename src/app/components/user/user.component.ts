@@ -31,6 +31,7 @@ export class UserComponent implements OnInit {
     this.loadUsers();
   }
 
+
   loadUsers() {
     this.unitService.getUsers().subscribe({
       next: (response) => {

@@ -12,7 +12,10 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit {
   title = 'admin-D-SERVE';
-  isAuthenticated = false;
+  // isAuthenticated = false;
+
+  isAuthenticated = true; // contoh, nanti bisa pakai auth service
+  isMenuOpen = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
