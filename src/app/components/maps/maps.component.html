@@ -1,0 +1,37 @@
+<!-- Header
+<header class="flex items-center justify-between px-4 py-3 bg-white shadow-md">
+  <button
+    (click)="goBack()"
+    class="flex items-center space-x-1 px-3 py-1 rounded-lg bg-gray-200 hover:bg-gray-300 transition"
+  >
+    <svg
+      class="w-4 h-4"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      viewBox="0 0 24 24"
+    >
+      <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+    </svg>
+    <span>Back</span>
+  </button>
+
+  <h1 class="text-lg font-semibold text-center flex-1">Peta Lokasi Order</h1>
+  <div class="w-8"></div>
+</header> -->
+
+<!-- Info Card -->
+<div
+  *ngIf="lat && lng"
+  class="absolute top-20 left-4 sm:top-24 sm:left-6 lg:top-6 lg:right-6 lg:left-auto
+             bg-white p-4 rounded-xl shadow-md z-10 w-64"
+>
+  <p class="font-semibold mb-1">Koordinat</p>
+  <p class="text-sm text-gray-600">Lat: {{ lat.toFixed(5) }}</p>
+  <p class="text-sm text-gray-600">Lng: {{ lng.toFixed(5) }}</p>
+</div>
+
+<!-- Map Wrapper -->
+<div class="flex flex-col w-full h-[calc(100vh-3.25rem)]">
+  <div id="map" class="flex-1 w-full"></div>
+</div>
