@@ -15,6 +15,7 @@ import { User, CreateUserRequest, UpdateUserRequest } from '../../models/unit.mo
 })
 export class UserComponent implements OnInit {
   users: User[] = [];
+  isLoading = false;
   selectedUser: CreateUserRequest = { username: '', password: '', role: '' };
   editingUserId: string | null = null;
   isEditing = false;
@@ -33,12 +34,15 @@ export class UserComponent implements OnInit {
 
 
   loadUsers() {
+    this.isLoading = true; // mulai loading
     this.unitService.getUsers().subscribe({
       next: (response) => {
         this.users = response.data.users || [];
         console.log("cek ini masuk user",this.users)
+        this.isLoading = false; // selesai loading
       },
       error: (error) => {
+        this.isLoading = false; // pastikan loading berhenti walaupun error
         if (error.status === 401) {
           this.authService.logout();
           this.router.navigate(['/login']);

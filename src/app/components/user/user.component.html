@@ -83,7 +83,26 @@
             <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
           </tr>
         </thead>
+        
         <tbody class="bg-white divide-y divide-gray-200">
+          
+          <ng-container *ngIf="isLoading">
+            <tr *ngFor="let n of [1,2,3,4,5]" class="animate-pulse">
+              <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-10"></div></td>
+              <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-32"></div></td>
+              <td class="px-6 py-4"><div class="h-6 bg-gray-200 rounded w-24"></div></td>
+              <td class="px-6 py-4"><div class="h-6 bg-gray-200 rounded w-28"></div></td>
+              <td class="px-6 py-4"><div class="h-6 bg-gray-200 rounded w-28"></div></td>
+              <td class="px-6 py-4"><div class="h-6 bg-gray-200 rounded w-24"></div></td>
+              
+              <td class="px-6 py-4 flex space-x-4">
+                <div class="h-4 bg-gray-200 rounded w-10"></div>
+                <div class="h-4 bg-gray-200 rounded w-14"></div>
+              </td>
+            </tr>
+          </ng-container>
+
+          <ng-container *ngIf="!isLoading">
           <tr *ngFor="let user of users" class="hover:bg-gray-50 transition duration-150">
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ user.id }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ user.username }}</td>
@@ -97,8 +116,8 @@
               <span *ngIf="user.unit" class="inline-flex px-3 py-1 text-xs font-semibold rounded-full"
                     [ngClass]="{
                       'bg-green-100 text-green-800': user.unit.status === 'AVAILABLE',
-                      'bg-yellow-100 text-yellow-800': user.unit.status === 'MAINTENANCE',
-                      'bg-red-100 text-red-800': user.unit.status === 'BUSY'
+                      'bg-red-100 text-red-800': user.unit.status === 'MAINTENANCE',
+                      'bg-yellow-100 text-yellow-800 ': user.unit.status === 'BUSY'
                     }">
                 {{ user.unit.status }}
               </span>
@@ -118,6 +137,7 @@
               </button>
             </td>
           </tr>
+          </ng-container>
         </tbody>
       </table>
     </div>

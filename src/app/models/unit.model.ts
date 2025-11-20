@@ -1,6 +1,7 @@
 export interface Unit {
   id?: string;
   name: string;
+  status?: string;
   unitTypeId: string;
   unitType?: UnitType;
   createdAt?: string;

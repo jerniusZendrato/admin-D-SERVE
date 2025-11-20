@@ -37,9 +37,23 @@
             required
             class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
           >
-            <option value="">Select Unit Type</option>
+            <option value="" disabled>Select Unit Type</option>
             <option *ngFor="let unitType of unitTypes" [value]="unitType.id">{{ unitType.name }}</option>
           </select>
+        </div>
+        <div>
+          <label class="block text-sm font-semibold text-gray-700 mb-2">Status</label>
+          <select 
+            [(ngModel)]="selectedUnit.status" 
+            name="unitTypeId"
+            required
+            class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
+          >
+            <option value="" disabled>Select status</option>
+            <option *ngFor="let status of statuses" [value]="status">
+              {{ status }}
+            </option>
+           </select>
         </div>
         <div class="flex justify-end space-x-3 pt-4">
           <button type="button" (click)="closeForm()" 
@@ -64,10 +78,23 @@
             <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ID</th>
             <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Name</th>
             <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Unit Type</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
             <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
           </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
+
+          <ng-container *ngIf="isLoading">
+            <tr *ngFor="let n of [1,2,3,4,5]" class="animate-pulse">
+              <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-10"></div></td>
+              <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-32"></div></td>
+              <td class="px-6 py-4"><div class="h-6 bg-gray-200 rounded w-24"></div></td>
+              <td class="px-6 py-4"><div class="h-6 bg-gray-200 rounded w-24"></div></td>
+              <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-16"></div></td>
+            </tr>
+          </ng-container>
+
+          <ng-container *ngIf="!isLoading">
           <tr *ngFor="let unit of units" class="hover:bg-gray-50 transition duration-150">
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ unit.id }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ unit.name }}</td>
@@ -77,6 +104,29 @@
               </span>
               <span *ngIf="!unit.unitType" class="text-gray-400">No Unit Type</span>
             </td>
+            
+            <!-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              <span *ngIf="unit.status" class="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-800">
+                {{ unit.status }}
+              </span>
+            </td> -->
+
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+              <span
+                *ngIf="unit.status"
+                class="inline-flex px-3 py-1 text-xs font-semibold rounded-full"
+                [ngClass]="{
+                    'bg-green-100 text-green-800': unit.status === 'AVAILABLE',
+                    'bg-red-100 text-red-800': unit.status === 'MAINTENANCE',
+                    'bg-yellow-100 text-yellow-800': unit.status === 'BUSY'
+                  }"
+                >
+                {{ unit.status }}
+              </span>
+            </td>
+
+            <!-- <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ unit.status }}</td> -->
+            
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-3">
               <button (click)="openForm(unit)" class="text-blue-600 hover:text-blue-900 transition duration-150 font-medium">
                 Edit
@@ -86,6 +136,7 @@
               </button>
             </td>
           </tr>
+          </ng-container>
         </tbody>
       </table>
     </div>

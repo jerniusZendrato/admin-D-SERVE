@@ -5,7 +5,8 @@ import { Router } from '@angular/router';
 import { UnitService } from '../../services/unit.service';
 import { AuthService } from '../../services/auth.service';
 import { Unit, UnitType, CreateUnitRequest } from '../../models/unit.model';
-
+import { ToastService } from '../../services/toast.service';
+export type UnitStatus = 'AVAILABLE' | 'BUSY' | 'MAINTENANCE';
 @Component({
   selector: 'app-unit',
   standalone: true,
@@ -13,8 +14,11 @@ import { Unit, UnitType, CreateUnitRequest } from '../../models/unit.model';
   templateUrl: './unit.component.html',
   styleUrl: './unit.component.css'
 })
+
+
 export class UnitComponent implements OnInit {
   units: Unit[] = [];
+  isLoading = false;
   unitTypes: UnitType[] = [];
   selectedUnit: Unit = { name: '', unitTypeId: '' };
   isEditing = false;
@@ -23,7 +27,8 @@ export class UnitComponent implements OnInit {
   constructor(
     private unitService: UnitService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
   ngOnInit() {
@@ -31,14 +36,20 @@ export class UnitComponent implements OnInit {
     this.loadUnitTypes();
   }
 
+  statuses: UnitStatus[] = ['AVAILABLE',  'MAINTENANCE'];
+
+
   loadUnits() {
+    this.isLoading = true; // mulai loading
     this.unitService.getUnits().subscribe({
       next: (response) => {
         this.units = response.data.units || [];
 
-        console.log("this.units :",this.units )
+        // console.log("this.units :",this.units )
+        this.isLoading = false; // selesai loading
       },
       error: (error) => {
+        this.isLoading = false;
         if (error.status === 401) {
           this.authService.logout();
           this.router.navigate(['/login']);
@@ -87,7 +98,13 @@ export class UnitComponent implements OnInit {
           this.loadUnits();
           this.closeForm();
         },
-        error: (error) => console.error('Error updating unit:', error)
+        error: (error) =>
+          {
+            this.toastService.show(`Gagal Accepted, ${error.error.errors[0]}`, 'error');
+             console.error('Error updating unit:', error.error.errors[0])
+
+        }
+        
       });
     } else {
       const createRequest: CreateUnitRequest = {

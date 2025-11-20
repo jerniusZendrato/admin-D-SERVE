@@ -15,6 +15,7 @@ import { UnitType } from '../../models/unit.model';
 })
 export class UnitTypeComponent implements OnInit {
   unitTypes: UnitType[] = [];
+  isLoading = false;
   selectedUnitType: UnitType = { name: '', roleUnitType: 'HELPER' };
   isEditing = false;
   showForm = false;
@@ -31,11 +32,14 @@ export class UnitTypeComponent implements OnInit {
   }
 
   loadUnitTypes() {
+    this.isLoading = true; // mulai loading
     this.unitService.getUnitTypes().subscribe({
       next: (response) => {
         this.unitTypes = response.data?.['unit-types'] || [];
+        this.isLoading = false; // selesai loading
       },
       error: (error) => {
+        this.isLoading = false; // pastikan loading berhenti walaupun error
         if (error.status === 401) {
           this.authService.logout();
           this.router.navigate(['/login']);
