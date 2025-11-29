@@ -6,6 +6,7 @@ import { UnitTypeComponent } from './components/unit-type/unit-type.component';
 import { UserComponent } from './components/user/user.component';
 import { authGuard } from './guards/auth.guard';
 import { MapsComponent } from './components/maps/maps.component';
+import { HistoryComponent } from './components/history/history.component';
 
 export const routes: Routes = [
      { path: 'login', component: LoginComponent },
@@ -15,4 +16,5 @@ export const routes: Routes = [
      { path: 'unit-types', component: UnitTypeComponent, canActivate: [authGuard] },
      { path: 'users', component: UserComponent, canActivate: [authGuard] },
      { path: 'maps', component: MapsComponent, canActivate: [authGuard] },
+     { path: 'history', component: HistoryComponent, canActivate: [authGuard] },
 ];

@@ -1,0 +1,162 @@
+<div class="p-6 bg-gray-100 min-h-screen">
+
+  <!-- HEADER -->
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+    <h1 class="text-3xl font-extrabold text-gray-800 mb-4 md:mb-0 flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      History Transaksi
+    </h1>
+
+   <button 
+    (click)="downloadExcel()" 
+    class="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 
+            text-white px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition duration-200 
+            font-semibold flex items-center gap-2">
+    
+    <!-- Excel Icon -->
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M4 4h8l6 6v10a2 2 0 01-2 2H4a2 2 0 01-2-2V6a2 2 0 012-2z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M12 4v6h6" />
+        <text x="8" y="17" font-size="8" fill="currentColor">X</text>
+    </svg>
+
+    Download Excel
+    </button>
+
+  </div>
+
+  <!-- TABLE -->
+  <div class="bg-white rounded-2xl shadow-lg overflow-hidden mt-6">
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+        
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ID</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Users</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Location</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Status</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Accepted</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Prosess</th>
+                <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Completed</th>
+            </tr>
+            </thead>
+
+
+        <tbody class="bg-white divide-y divide-gray-200">
+
+            <!-- Loading Skeleton -->
+            <ng-container *ngIf="isLoading">
+                <tr *ngFor="let n of [1,2,3,4,5]" class="animate-pulse">
+                <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-10"></div></td>
+                <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-32"></div></td>
+                <td class="px-6 py-4"><div class="h-6 bg-gray-200 rounded w-24"></div></td>
+                <td class="px-6 py-4"><div class="h-6 bg-gray-200 rounded w-24"></div></td>
+                <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-16"></div></td>
+                <td class="px-6 py-4"><div class="h-6 bg-gray-200 rounded w-24"></div></td>
+                <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-16"></div></td>
+                </tr>
+            </ng-container>
+
+            <!-- Actual Data -->
+            <ng-container *ngIf="!isLoading">
+                <tr *ngFor="let h of historys" class="hover:bg-gray-50 transition duration-150">
+
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                    {{ h.id }}
+                </td>
+                
+
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                    {{ h.requesterUserName }} → {{ h.responderUserName }}
+                </td>
+                
+
+                <td class="px-6 py-4 whitespace-nowrap text-sm">
+                    <!-- <span class="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                    {{ h.location }}
+                    </span> -->
+                    <div class="text-gray-300 text-sm mb-3">
+                        <!-- Lokasi: {{ h.location }} <br>
+                        Koordinat: 
+                        <span class="text-yellow-300">{{ h.requesterLatitude }}, {{ h.requesterLongitude }}</span><br> -->
+
+                    <!-- Jika responder punya koordinat → tampilkan RUTE -->
+                        <a 
+                        *ngIf="h.responderLatitude && h.responderLongitude; else singlePoint"
+                        [href]="'https://www.google.com/maps/dir/' 
+                            + h.requesterLatitude + ',' + h.requesterLongitude 
+                            + '/' 
+                            + h.responderLatitude + ',' + h.responderLongitude"
+                        target="_blank"
+                        class="text-blue-400 underline hover:text-blue-300"
+                        >
+                        Buka Rute di Google Maps
+                        </a>
+
+                        <!-- Jika responder tidak punya koordinat → tampilkan TITIK REQUESTER saja -->
+                        <ng-template #singlePoint>
+                        <a
+                            [href]="'https://www.google.com/maps?q=' 
+                            + h.requesterLatitude + ',' + h.requesterLongitude"
+                            target="_blank"
+                            class="text-blue-400 underline hover:text-blue-300"
+                        >
+                            Buka Lokasi Requester
+                        </a>
+                        </ng-template>
+
+
+                    </div>
+                </td>
+
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                    <span
+                    class="inline-flex px-3 py-1 text-xs font-semibold rounded-full"
+                    [ngClass]="{
+                        'bg-yellow-100 text-yellow-800': h.status === 'ACCEPTED',
+                        'bg-green-100 text-green-800': h.status === 'COMPLETED',
+                        'bg-red-100 text-red-800': h.status === 'CANCELLED'
+                    }"
+                    >
+                    {{ h.status }}
+                    </span>
+                </td>
+
+               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                <span *ngIf="h.acceptedAt; else noAccepted">
+                    {{ h.acceptedAt | date:'dd MMM yyyy, HH:mm' }}
+                </span>
+                <ng-template #noAccepted>Belum ada waktu</ng-template>
+                </td>
+
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                <span *ngIf="h.prosessAt; else noProcess">
+                    {{ h.prosessAt | date:'dd MMM yyyy, HH:mm' }}
+                </span>
+                <ng-template #noProcess>Belum ada waktu</ng-template>
+                </td>
+
+                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">
+                <span *ngIf="h.completedAt; else noComplete">
+                    {{ h.completedAt | date:'dd MMM yyyy, HH:mm' }}
+                </span>
+                <ng-template #noComplete>Belum ada waktu</ng-template>
+                </td>
+
+
+                </tr>
+            </ng-container>
+
+            </tbody>
+
+      </table>
+    </div>
+  </div>
+
+</div>
