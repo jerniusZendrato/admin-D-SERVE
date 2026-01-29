@@ -32,6 +32,13 @@ export class UserComponent implements OnInit {
     this.loadUsers();
   }
 
+  showPassword = false;
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+
+
 
   loadUsers() {
     this.isLoading = true; // mulai loading

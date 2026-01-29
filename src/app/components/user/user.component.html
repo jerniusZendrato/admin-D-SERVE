@@ -30,7 +30,7 @@
             class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
           >
         </div>
-        <div>
+        <!-- <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
           <input 
             type="password" 
@@ -40,7 +40,61 @@
             [placeholder]="isEditing ? 'Leave blank to keep current password' : 'Enter password'"
             class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-200"
           >
+        </div> -->
+
+        <div class="relative">
+          <label class="block text-sm font-semibold text-gray-700 mb-2">
+            Password
+          </label>
+
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="selectedUser.password"
+            name="password"
+            [required]="!isEditing"
+            [placeholder]="isEditing 
+              ? 'Leave blank to keep current password' 
+              : 'Enter password'"
+            class="w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl
+                  focus:outline-none focus:ring-2 focus:ring-blue-400
+                  focus:border-transparent transition duration-200"
+          />
+
+          <!-- Icon mata -->
+          <button
+            type="button"
+            (click)="togglePassword()"
+            class="absolute right-4 top-10 text-gray-500 hover:text-gray-700"
+          >
+            <!-- Show -->
+            <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M2.458 12C3.732 7.943 7.523 5 12 5
+                  c4.478 0 8.268 2.943 9.542 7
+                  -1.274 4.057-5.064 7-9.542 7
+                  -4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+
+            <!-- Hide -->
+            <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3 3l18 18" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M10.73 5.073A9.957 9.957 0 0112 5
+                  c4.478 0 8.268 2.943 9.542 7
+                  a9.973 9.973 0 01-4.043 5.19" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M6.223 6.223A9.957 9.957 0 002.458 12" />
+            </svg>
+          </button>
         </div>
+
         <div>
           <label class="block text-sm font-semibold text-gray-700 mb-2">Role</label>
           <select 
