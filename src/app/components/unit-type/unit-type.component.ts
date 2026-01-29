@@ -86,12 +86,30 @@ export class UnitTypeComponent implements OnInit {
     }
   }
 
+  // deleteUnitType(id: string) {
+  //   if (confirm('Are you sure you want to delete this unit type?')) {
+  //     this.unitService.deleteUnitType(id).subscribe({
+  //       next: () => this.loadUnitTypes(),
+  //       error: (error) => console.error('Error deleting unit type:', error)
+  //     });
+  //   }
+  // }
+
   deleteUnitType(id: string) {
-    if (confirm('Are you sure you want to delete this unit type?')) {
-      this.unitService.deleteUnitType(id).subscribe({
-        next: () => this.loadUnitTypes(),
-        error: (error) => console.error('Error deleting unit type:', error)
-      });
-    }
+  if (confirm('Are you sure you want to delete this unit type?')) {
+    this.unitService.deleteUnitType(id).subscribe({
+      next: () => {
+        this.loadUnitTypes();
+        alert('Unit type deleted successfully');
+      },
+      error: (error) => {
+        console.error('Error deleting unit type:', error.error.errors?.[0] || error);
+        alert(
+          error.error.errors?.[0] || error || 'Failed to delete unit type. Please try again.'
+        );
+      }
+    });
   }
+}
+
 }
