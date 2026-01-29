@@ -19,6 +19,13 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
+
+  showPassword = false;
+
+  togglePassword() {
+    this.showPassword = !this.showPassword;
+  }
+
   onLogin() {
     if (!this.credentials.username || !this.credentials.password) {
       this.error = 'Username dan password harus diisi!';
