@@ -95,8 +95,8 @@
           </ng-container>
 
           <ng-container *ngIf="!isLoading">
-          <tr *ngFor="let unit of units" class="hover:bg-gray-50 transition duration-150">
-            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ unit.id }}</td>
+          <tr *ngFor="let unit of units; let i = index" class="hover:bg-gray-50 transition duration-150">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">{{ i + 1 }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ unit.name }}</td>
             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
               <span *ngIf="unit.unitType" class="inline-flex px-3 py-1 text-xs font-semibold rounded-full bg-indigo-100 text-indigo-800">
