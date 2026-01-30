@@ -163,6 +163,13 @@ export class LocationComponent implements OnInit {
     error: (err) => console.error('Error deleting location:', err)
   });
 
+
+  
+
+}
+
+goBack() {
+  window.history.back();
 }
 
 

@@ -2,13 +2,43 @@
 
   <!-- HEADER -->
   <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-    <h1 class="text-3xl font-extrabold text-gray-800 mb-4 md:mb-0 flex items-center gap-2">
+    <!-- <h1 class="text-3xl font-extrabold text-gray-800 mb-4 md:mb-0 flex items-center gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
               d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
       </svg>
       History Transaksi
+    </h1> -->
+
+
+    <div class="flex items-center gap-4">
+
+    <!-- Tombol Kembali -->
+    <button 
+      (click)="goBack()"
+      class="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 
+             px-4 py-2 rounded-xl shadow-sm transition duration-200"
+    >
+      <!-- Icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" 
+           viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M15 19l-7-7 7-7" />
+      </svg>
+      Back
+    </button>
+
+    <!-- Title -->
+    <h1 class="text-3xl font-extrabold text-gray-800 flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-yellow-600" fill="none" 
+           viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      History Transaksi
     </h1>
+
+  </div>
 
    <button 
     (click)="downloadExcel()" 

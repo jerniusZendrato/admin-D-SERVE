@@ -38,6 +38,10 @@ export class UserComponent implements OnInit {
     this.showPassword = !this.showPassword;
   }
 
+  goBack() {
+  window.history.back();
+}
+
 
 
   loadUsers() {

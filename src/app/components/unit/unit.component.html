@@ -1,7 +1,32 @@
 <div class="p-6 bg-gray-100 min-h-screen">
   <!-- Header -->
   <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-    <h1 class="text-3xl font-extrabold text-gray-800 mb-4 md:mb-0">Units Management</h1>
+    <!-- <h1 class="text-3xl font-extrabold text-gray-800 mb-4 md:mb-0">Units Management</h1> -->
+
+
+
+    <div class="flex items-center gap-4">
+
+    <!-- Tombol Kembali -->
+    <button 
+      (click)="goBack()"
+      class="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 
+             px-4 py-2 rounded-xl shadow-sm transition duration-200"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" 
+           viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M15 19l-7-7 7-7" />
+      </svg>
+      Back
+    </button>
+
+    <!-- Title -->
+    <h1 class="text-3xl font-extrabold text-gray-800">
+      Units Management
+    </h1>
+
+  </div>
     <button (click)="openForm()" 
             class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition duration-200 font-semibold flex items-center gap-2">
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

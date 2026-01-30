@@ -91,6 +91,10 @@ export class UnitComponent implements OnInit {
     this.isEditing = false;
   }
 
+  goBack() {
+  window.history.back();
+}
+
   saveUnit() {
     if (this.isEditing && this.selectedUnit.id) {
       this.unitService.updateUnit(this.selectedUnit.id, this.selectedUnit).subscribe({

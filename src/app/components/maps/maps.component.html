@@ -21,6 +21,14 @@
 </header> -->
 
 <!-- Info Card -->
+<!-- Button Back (statis kiri atas) -->
+<!-- <button
+  (click)="goBack()"
+  class="absolute top-4 left-4 bg-white text-gray-700 px-4 py-2 rounded-lg shadow-lg z-20 hover:bg-gray-100"
+>
+  ← Back
+</button> -->
+
 <div
   *ngIf="lat && lng"
   class="absolute top-20 left-4 sm:top-24 sm:left-6 lg:top-6 lg:right-6 lg:left-auto
@@ -33,5 +41,6 @@
 
 <!-- Map Wrapper -->
 <div class="flex flex-col w-full h-[calc(100vh-3.25rem)]">
+  
   <div id="map" class="flex-1 w-full"></div>
 </div>

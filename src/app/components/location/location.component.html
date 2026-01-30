@@ -2,7 +2,22 @@
 
   <!-- HEADER -->
   <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-    
+     <div class="flex items-center gap-4">
+
+    <!-- Tombol Kembali -->
+    <button 
+      (click)="goBack()"
+      class="flex items-center gap-2 bg-gray-200 hover:bg-gray-300 text-gray-700 
+             px-4 py-2 rounded-xl shadow-sm transition duration-200"
+    >
+      <!-- Icon -->
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" 
+           viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+              d="M15 19l-7-7 7-7" />
+      </svg>
+      Back
+    </button>
     <h1 class="text-3xl font-extrabold text-gray-800 mb-4 md:mb-0 flex items-center gap-2">
       <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -10,6 +25,7 @@
       </svg>
       Setting Location
     </h1>
+     </div>
 
     <!-- BUTTON ADD -->
     <button
@@ -57,10 +73,10 @@
           <!-- DATA TABLE -->
           <ng-container *ngIf="!isLoading">
 
-            <tr *ngFor="let loc of locations" class="hover:bg-gray-50 transition duration-150">
+            <tr *ngFor="let loc of locations; let i = index" class="hover:bg-gray-50 transition duration-150">
               
               <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
-                {{ loc.id }}
+                {{ i + 1 }}
               </td>
 
               <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">

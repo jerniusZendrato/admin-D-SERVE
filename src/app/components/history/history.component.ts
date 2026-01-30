@@ -53,6 +53,10 @@ export class HistoryComponent implements OnInit {
     });
     }
 
+    goBack() {
+  window.history.back();
+}
+
     downloadExcel() {
   if (!this.historys || this.historys.length === 0) {
     this.toastService.show("Tidak ada data untuk di-download", 'error');

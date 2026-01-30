@@ -31,6 +31,12 @@ export class UnitTypeComponent implements OnInit {
     this.loadUnitTypes();
   }
 
+
+  goBack() {
+  window.history.back();
+}
+
+
   loadUnitTypes() {
     this.isLoading = true; // mulai loading
     this.unitService.getUnitTypes().subscribe({
