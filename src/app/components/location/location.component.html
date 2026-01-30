@@ -1,0 +1,168 @@
+<div class="p-6 bg-gray-100 min-h-screen">
+
+  <!-- HEADER -->
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
+    
+    <h1 class="text-3xl font-extrabold text-gray-800 mb-4 md:mb-0 flex items-center gap-2">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M17.657 16.657L13.414 12.414A4 4 0 1116 8a4 4 0 01-1.172 2.828l4.243 4.243a1 1 0 01-1.414 1.414zM10 8a2 2 0 100-4 2 2 0 000 4z" />
+      </svg>
+      Setting Location
+    </h1>
+
+    <!-- BUTTON ADD -->
+    <button
+      (click)="openAddModal()"
+      class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700
+             text-white px-6 py-3 rounded-xl shadow-lg transform hover:scale-105 transition 
+             duration-200 font-semibold flex items-center gap-2">
+
+      <!-- Plus Icon -->
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 4v16m8-8H4" />
+      </svg>
+
+      Tambah Lokasi
+    </button>
+  </div>
+
+  <!-- TABLE CARD -->
+  <div class="bg-white rounded-2xl shadow-lg overflow-hidden mt-6">
+    
+    <div class="overflow-x-auto">
+      <table class="min-w-full divide-y divide-gray-200">
+
+        <!-- HEADER TABLE -->
+        <thead class="bg-gray-50">
+          <tr>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">ID</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Nama Lokasi</th>
+            <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Aksi</th>
+          </tr>
+        </thead>
+
+        <tbody class="bg-white divide-y divide-gray-200">
+
+          <!-- LOADING SKELETON -->
+          <ng-container *ngIf="isLoading">
+            <tr *ngFor="let s of [1,2,3,4]" class="animate-pulse">
+              <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-16"></div></td>
+              <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-48"></div></td>
+              <td class="px-6 py-4"><div class="h-4 bg-gray-200 rounded w-20"></div></td>
+            </tr>
+          </ng-container>
+
+          <!-- DATA TABLE -->
+          <ng-container *ngIf="!isLoading">
+
+            <tr *ngFor="let loc of locations" class="hover:bg-gray-50 transition duration-150">
+              
+              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
+                {{ loc.id }}
+              </td>
+
+              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                {{ loc.name }}
+              </td>
+
+
+                <!-- BUTTON EDIT -->
+                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-3">
+                    <button  (click)="openEditModal(loc)" class="text-blue-600 hover:text-blue-900 transition duration-150 font-medium">
+                        Edit
+                    </button>
+                    <button  (click)="deleteLocation(loc.id)" class="text-red-600 hover:text-red-900 transition duration-150 font-medium">
+                        Delete
+                    </button>
+                    </td>
+
+
+            </tr>
+
+          </ng-container>
+
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+
+
+
+
+  <!-- ADD LOCATION MODAL -->
+<div 
+  *ngIf="showAddModal" 
+  class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+
+  <div class="bg-white p-6 rounded-2xl shadow-xl w-96">
+
+    <h2 class="text-xl font-semibold text-gray-800 mb-4">Add Location</h2>
+
+    <input 
+      type="text" 
+      [(ngModel)]="newLocationName"
+      placeholder="Location name"
+      class="w-full border border-gray-300 rounded-lg px-3 py-2 mb-4 focus:ring-2 focus:ring-blue-400">
+
+    <div class="flex justify-end gap-3">
+      <button 
+        class="px-4 py-2 rounded-lg bg-gray-300 hover:bg-gray-400"
+        (click)="closeAddModal()">
+        Cancel
+      </button>
+
+      <button 
+        class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700"
+        (click)="saveNewLocation()">
+        Save
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<!-- EDIT MODAL -->
+<div 
+  *ngIf="showEditModal"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+>
+  <div class="bg-white p-6 rounded-xl shadow-xl w-96 animate-fadeIn">
+    
+    <h2 class="text-xl font-semibold mb-4">Edit Location</h2>
+
+    <input 
+      type="text"
+      class="w-full border border-gray-300 rounded-lg p-2 focus:ring-2 focus:ring-blue-400"
+      [(ngModel)]="editLocationName"
+      placeholder="Location name"
+    />
+
+    <div class="flex justify-end mt-5 space-x-2">
+      <button 
+        class="px-4 py-2 bg-gray-300 rounded-lg hover:bg-gray-400"
+        (click)="closeEditModal()"
+      >
+        Cancel
+      </button>
+
+      <button 
+        class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+        (click)="saveEditLocation()"
+      >
+        Save
+      </button>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+</div>

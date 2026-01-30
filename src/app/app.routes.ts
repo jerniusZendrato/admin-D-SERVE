@@ -7,6 +7,7 @@ import { UserComponent } from './components/user/user.component';
 import { authGuard } from './guards/auth.guard';
 import { MapsComponent } from './components/maps/maps.component';
 import { HistoryComponent } from './components/history/history.component';
+import { LocationComponent } from './components/location/location.component';
 
 export const routes: Routes = [
      { path: 'login', component: LoginComponent },
@@ -17,4 +18,6 @@ export const routes: Routes = [
      { path: 'users', component: UserComponent, canActivate: [authGuard] },
      { path: 'maps', component: MapsComponent, canActivate: [authGuard] },
      { path: 'history', component: HistoryComponent, canActivate: [authGuard] },
+     { path: 'location', component: LocationComponent, canActivate: [authGuard] },
+     
 ];

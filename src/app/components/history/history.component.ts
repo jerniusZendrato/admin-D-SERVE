@@ -28,9 +28,7 @@ export class HistoryComponent implements OnInit {
 
 
   ngOnInit() {
-
-this.loadhistory()
-      
+    this.loadhistory()   
   }
 
   loadhistory() {
